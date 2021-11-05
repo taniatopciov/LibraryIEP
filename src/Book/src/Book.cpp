@@ -1,29 +1,32 @@
 #include "Book.hpp"
 
+// constructor with member initialization list
 Book::Book()
-    : numberOfPages(0)
+    : numberOfPages(0),
+      author(NULL)
 {
     this->title = new char[strlen("") + 1];
     this->genre = new char[strlen("") + 1];
 
     strcpy(this->title, "");
     strcpy(this->genre, "");
-
-    this->author = NULL;
 }
 
+// constructor with member initialization list
+// deep copy for title and genre
 Book::Book(int numberOfPages, char *title, char *genre, Author *author)
-    : numberOfPages(numberOfPages)
+    : numberOfPages(numberOfPages),
+      author(author)
 {
     this->title = new char[strlen(title) + 1];
     this->genre = new char[strlen(genre) + 1];
 
     strcpy(this->title, title);
     strcpy(this->genre, genre);
-
-    this->author = author;
 }
 
+// copy constructor
+// deep copy for title and genre
 Book::Book(const Book &book)
 {
     this->numberOfPages = book.numberOfPages;
@@ -37,12 +40,15 @@ Book::Book(const Book &book)
     this->author = book.author;
 }
 
+// deallocate memory
 Book::~Book()
 {
     delete[] title;
     delete[] genre;
 }
 
+//copy assignment operator
+// deep copy for title and genre
 Book &Book::operator=(const Book &book)
 {
     this->numberOfPages = book.numberOfPages;
@@ -70,5 +76,24 @@ void Book::printDetails()
     else
     {
         cout << "This book has no valid details to show" << endl;
+    }
+}
+
+void Book::makeTitleUppercase()
+{
+    int i;
+
+    for (i = 0; i < strlen(title); i++)
+    {
+        title[i] = toupper(title[i]);
+    }
+}
+
+void Book::makeTitleLowercase()
+{
+    int i;
+    for (i = 0; i < strlen(title); i++)
+    {
+        title[i] = tolower(title[i]);
     }
 }

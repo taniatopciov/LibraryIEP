@@ -22,6 +22,8 @@ public:
     Book &operator=(const Book &);
 
     void printDetails();
+    void makeTitleUppercase();
+    void makeTitleLowercase();
 
 private:
     int numberOfPages;

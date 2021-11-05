@@ -36,7 +36,13 @@ int main()
 
     Book book3(book1);
 
+    book3.makeTitleUppercase();
+
+    book2.makeTitleLowercase();
+
     book3.printDetails();
+
+    book2.printDetails();
 
     return 0;
 }
