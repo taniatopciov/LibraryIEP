@@ -11,3 +11,8 @@ void Author::printPresentation()
          << ". I am " << this->age << " years old and I have written "
          << this->numberOfWrittenBooks << " books." << endl;
 }
+
+char *Author::getAuthorName()
+{
+    return this->name;
+}
