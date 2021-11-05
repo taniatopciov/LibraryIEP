@@ -21,6 +21,8 @@ public:
     //copy assignment operator
     Book &operator=(const Book &);
 
+    char *getTitle();
+
     void printDetails();
     void makeTitleUppercase();
     void makeTitleLowercase();

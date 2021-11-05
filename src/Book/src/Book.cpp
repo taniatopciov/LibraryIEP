@@ -97,3 +97,8 @@ void Book::makeTitleLowercase()
         title[i] = tolower(title[i]);
     }
 }
+
+char *Book::getTitle()
+{
+    return this->title;
+}

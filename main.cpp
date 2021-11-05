@@ -1,5 +1,6 @@
 #include "src/Person/src/Author.hpp"
 #include "src/Book/src/Book.hpp"
+#include "src/Library/src/Library.hpp"
 
 #include <iostream>
 using namespace std;
@@ -20,7 +21,7 @@ int main()
 
     /*Author author5 = author2; // not allowed because the copy assignment operator is private and has no implementation*/
 
-    Book book1; // calls the default constuctor
+    Book book1; // calls no args constuctor
     book1.printDetails();
 
     char title[15] = "Inocentii";
@@ -50,6 +51,34 @@ int main()
     book2.printDetails();
 
     book3.printDetails();
+
+    /*-----------------------------*/
+
+    Library library; // calls default constructor
+
+    Author *a;
+    a = &author2;
+
+    char title2[10] = "Solenoid";
+    char genre2[20] = "Literary fiction";
+
+    Book book4(350, title2, genre2, a);
+
+    library.addBook(book1);
+
+    library.addBook(book4);
+
+    library.addBook(book2);
+
+    cout << "All books before removal:" << endl;
+
+    library.printBooks();
+
+    library.removeBook(title2);
+
+    cout << "Books left after removal" << endl;
+
+    library.printBooks();
 
     return 0;
 }
