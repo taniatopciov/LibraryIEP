@@ -1,5 +1,6 @@
 #include "Author.hpp"
 
+// constructor with member initialization list
 Author::Author(char *name, int age, int numberOfWrittenBooks)
     : Person(name, age),
       numberOfWrittenBooks(numberOfWrittenBooks) {}
