@@ -4,8 +4,8 @@ set(myproject "Proiect-IEP")
 
 project(${myproject})
 
-add_subdirectory(src/Person)
+add_subdirectory(src)
 
 add_executable("${PROJECT_NAME}" main.cpp)
 
-target_link_libraries("${PROJECT_NAME}" PRIVATE Person)
+target_link_libraries("${PROJECT_NAME}" PRIVATE Person Book)
