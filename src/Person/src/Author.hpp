@@ -10,6 +10,10 @@ class Author : private Person
 public:
     Author(char *name, int age, int numberOfWrittenBooks);
     void printPresentation();
+    char *getAuthorName()
+    {
+        return this->name;
+    }
 
 private:
     int numberOfWrittenBooks;
