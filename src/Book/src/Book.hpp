@@ -11,26 +11,27 @@ class Book
 {
 public:
     Book();
-    Book(int numberOfPages, char *title, char *genre, Author *author);
+    Book(int numberOfPages, char *title, Author *author);
 
     //copy constructor
-    Book(const Book &);
+    Book(const Book &book);
 
-    ~Book();
+    virtual ~Book();
 
     //copy assignment operator
-    Book &operator=(const Book &);
+    Book &operator=(const Book &book);
 
     char *getTitle();
 
-    void printDetails();
+    virtual void printDetails();
+
+    void logCall(const string funcName);
     void makeTitleUppercase();
     void makeTitleLowercase();
 
-private:
+protected:
     int numberOfPages;
     char *title;
-    char *genre;
     Author *author;
 };
 

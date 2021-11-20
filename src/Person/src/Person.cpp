@@ -7,11 +7,11 @@ Person::Person(char *name, int age)
 {
     this->name = new char[strlen(name) + 1];
     strcpy(this->name, name);
-    cout << "Base class constructor was called" << endl;
+    cout << "Person constructor" << endl;
 }
 
 Person::~Person()
 {
     delete[] name;
-    cout << "Base class destructor was called" << endl;
+    cout << "Person destructor" << endl;
 }
