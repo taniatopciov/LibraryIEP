@@ -1,5 +1,6 @@
 #include "src/Person/src/Author.hpp"
 #include "src/Book/src/Book.hpp"
+#include "src/Book/src/Novel.hpp"
 #include "src/Library/src/Library.hpp"
 
 #include <iostream>
@@ -7,78 +8,75 @@ using namespace std;
 
 int main()
 {
-    char name1[20] = "Ioana Pirvulescu";
-    Author author1(name1, 61, 30);
-    author1.printPresentation();
+    char name1[20] = "Gustave Flaubert";
+    Author author1(name1, 59, 28);
 
-    char name2[20] = "Mircea Cartarescu";
-    Author author2(name2, 63, 42);
-    author2.printPresentation();
+    cout << endl;
 
-    /*Author author4; // Author has no default constructor ()*/
+    char name2[20] = "Émile Zola";
+    Author author2(name2, 62, 43);
 
-    /*Author author3 = author1; // not allowed because the copy constructor is private and has no implementation */
+    cout << endl;
 
-    /*Author author5 = author2; // not allowed because the copy assignment operator is private and has no implementation*/
+    char title1[15] = "Madame Bovary";
+    char literary_movement1[12] = "Realism";
 
-    Book book1; // calls no args constuctor
-    book1.printDetails();
+    Author *a1;
+    a1 = &author1;
 
-    char title[15] = "Inocentii";
-    char genre[15] = "Beletristica";
+    Novel novel1(400, title1, a1, literary_movement1);
 
-    Author *author;
-    author = &author1;
+    novel1.printDetails();
 
-    Book book2(400, title, genre, author); // calls the constructor with arguments
+    Novel novel2;
 
-    book2.printDetails();
+    cout << endl;
 
-    book1 = book2; // calls the copy assignment operator
+    novel2.printDetails();
 
-    book1.printDetails();
+    Novel novel3;
 
-    Book book3(book1); //calls the copy constructor
+    cout << endl;
 
-    book3.printDetails();
+    novel3.printDetails();
 
-    book2.makeTitleUppercase();
+    cout << endl;
 
-    book3.makeTitleLowercase();
+    novel3 = novel2 = novel1;
 
-    book1.printDetails();
+    cout << endl;
 
-    book2.printDetails();
+    novel2.printDetails();
 
-    book3.printDetails();
+    cout << endl;
 
-    /*-----------------------------*/
+    novel3.printDetails();
 
-    Library library; // calls default constructor
+    cout << endl;
 
-    Author *a;
-    a = &author2;
+    novel2 = novel2;
 
-    char title2[10] = "Solenoid";
-    char genre2[20] = "Literary fiction";
+    cout << endl;
 
-    Book book4(350, title2, genre2, a);
+    Author *a2;
+    a2 = &author2;
 
-    library.addBook(book1);
+    char title2[10] = "Germinal";
+    char literary_movement2[20] = "Naturalism";
 
-    library.addBook(book4);
+    Novel novel4(350, title2, a2, literary_movement2);
 
-    library.addBook(book2);
+    novel4.printDetails();
 
-    cout << "All books before removal:" << endl;
+    cout << endl;
 
-    library.printBooks();
+    novel1 = novel4;
 
-    library.removeBook(title2);
+    cout << endl;
 
-    cout << "Books left after removal" << endl;
+    novel1.printDetails();
 
-    library.printBooks();
+    cout << endl;
 
     return 0;
 }

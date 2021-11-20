@@ -1,6 +1,8 @@
 add_library(Book
     src/Book.hpp
     src/Book.cpp
+    src/Novel.hpp
+    src/Novel.cpp
 )
 
 target_link_libraries(Book PRIVATE Person)
