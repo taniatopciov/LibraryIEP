@@ -34,6 +34,12 @@ Novel::~Novel()
 
 Novel &Novel::operator=(const Novel &novel)
 {
+    if (this == &novel)
+    {
+        logCall("Novel copy assignment operator - self assignment");
+        return *this;
+    }
+
     Book::operator=(novel);
 
     char *oldLiteraryMovement = this->literary_movement;
@@ -48,14 +54,15 @@ Novel &Novel::operator=(const Novel &novel)
 
 void Novel::printDetails()
 {
+    Book::printDetails();
+
     if (strcmp(this->literary_movement, "") != 0)
     {
-        Book::printDetails();
         char *name = (this->author)->getAuthorName();
         cout << "Literary movement: " << this->literary_movement << endl;
     }
     else
     {
-        cout << "This novel has no valid details to show" << endl;
+        cout << "This novel has no other details to show" << endl;
     }
 }

@@ -22,13 +22,11 @@ Book::Book(int numberOfPages, char *title, Author *author)
 // copy constructor
 // deep copy for title
 Book::Book(const Book &book)
+    : numberOfPages(book.numberOfPages),
+      author(book.author)
 {
-    this->numberOfPages = book.numberOfPages;
-
     this->title = new char[strlen(book.title) + 1];
     strcpy(this->title, book.title);
-
-    this->author = book.author;
 
     logCall("Book copy constructor");
 }
@@ -73,12 +71,12 @@ void Book::printDetails()
     if (this->author != NULL && this->numberOfPages != 0 && strcmp(this->title, "") != 0)
     {
         char *name = (this->author)->getAuthorName();
-        cout << "The book \"" << this->title << "\", written by " << name
+        cout << "\"" << this->title << "\", written by " << name
              << ", has " << this->numberOfPages << " pages." << endl;
     }
     else
     {
-        cout << "This book has no valid details to show" << endl;
+        cout << "No valid details to show" << endl;
     }
 }
 

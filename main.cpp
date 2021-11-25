@@ -42,6 +42,7 @@ int main()
 
     cout << endl;
 
+    // item 10 - Have assignment operators return a reference to *this
     novel3 = novel2 = novel1;
 
     cout << endl;
@@ -53,7 +54,7 @@ int main()
     novel3.printDetails();
 
     cout << endl;
-
+    // item 11 - Handle assignment to self in operator=
     novel2 = novel2;
 
     cout << endl;
@@ -70,6 +71,7 @@ int main()
 
     cout << endl;
 
+    // item 12 - Copy all parts of an object
     novel1 = novel4;
 
     cout << endl;
