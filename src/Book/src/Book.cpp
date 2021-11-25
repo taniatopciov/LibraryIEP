@@ -6,77 +6,83 @@ Book::Book()
       author(NULL)
 {
     this->title = new char[strlen("") + 1];
-    this->genre = new char[strlen("") + 1];
-
     strcpy(this->title, "");
-    strcpy(this->genre, "");
 }
 
 // constructor with member initialization list
-// deep copy for title and genre
-Book::Book(int numberOfPages, char *title, char *genre, Author *author)
+// deep copy for title
+Book::Book(int numberOfPages, char *title, Author *author)
     : numberOfPages(numberOfPages),
       author(author)
 {
     this->title = new char[strlen(title) + 1];
-    this->genre = new char[strlen(genre) + 1];
-
     strcpy(this->title, title);
-    strcpy(this->genre, genre);
 }
 
 // copy constructor
-// deep copy for title and genre
+// deep copy for title
 Book::Book(const Book &book)
+    : numberOfPages(book.numberOfPages),
+      author(book.author)
 {
-    this->numberOfPages = book.numberOfPages;
-
     this->title = new char[strlen(book.title) + 1];
-    this->genre = new char[strlen(book.genre) + 1];
-
     strcpy(this->title, book.title);
-    strcpy(this->genre, book.genre);
 
-    this->author = book.author;
+    logCall("Book copy constructor");
 }
 
 // deallocate memory
 Book::~Book()
 {
-    delete[] title;
-    delete[] genre;
+    if (strcmp(title, "") != 0)
+    {
+        delete[] title;
+    }
+
+    logCall("Book destructor");
 }
 
 //copy assignment operator
-// deep copy for title and genre
+// deep copy for title
 Book &Book::operator=(const Book &book)
 {
+    if (this == &book)
+    {
+        logCall("Book copy assignment operator - self assignment");
+        return *this;
+    }
+
     this->numberOfPages = book.numberOfPages;
 
+    char *oldTitle = this->title;
     this->title = new char[strlen(book.title) + 1];
-    this->genre = new char[strlen(book.genre) + 1];
-
     strcpy(this->title, book.title);
-    strcpy(this->genre, book.genre);
+    delete[] oldTitle;
 
     this->author = book.author;
+
+    logCall("Book copy assignment operator");
 
     return *this;
 }
 
 void Book::printDetails()
 {
-    if (this->author != NULL && this->numberOfPages != 0 && strcmp(this->title, "") != 0 && strcmp(this->title, "") != 0)
+    if (this->author != NULL && this->numberOfPages != 0 && strcmp(this->title, "") != 0)
     {
         char *name = (this->author)->getAuthorName();
-        cout << "The book \"" << this->title << "\", written by " << name
-             << ", has " << this->numberOfPages << " pages and it's genre is "
-             << this->genre << "." << endl;
+        cout << "\"" << this->title << "\", written by " << name
+             << ", has " << this->numberOfPages << " pages." << endl;
     }
     else
     {
-        cout << "This book has no valid details to show" << endl;
+        cout << "No valid details to show" << endl;
     }
+}
+
+void Book::logCall(const string funcName)
+{
+    cout << funcName << endl;
 }
 
 void Book::makeTitleUppercase()
