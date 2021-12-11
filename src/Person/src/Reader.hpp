@@ -2,22 +2,25 @@
 #define READER_H
 
 #include <iostream>
+#include <memory>
+
 #include "Person.hpp"
-#include "../../Book/src/Book.hpp"
+#include "Book.hpp"
+
 using namespace std;
 
 class Reader : private Person
 {
 public:
-    Reader(char *name, int age, Book *book);
+    Reader(char *name, int age);
+
     void printPresentation();
     char *getReaderName();
-    void readBook();
-    void readAnotherBook(Book *book);
+
+    void readBookAndShare(Book *book, Reader *reader);
+    void readBookAndTransfer(Book *book, Reader *reader);
 
 private:
-    Book *book;
-
     Reader(const Reader &);
     Reader &operator=(const Person &);
 };

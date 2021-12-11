@@ -7,13 +7,12 @@
 
 using namespace std;
 
-#define MAX_AUTHORS 5
-
 class Encyclopedia : public Book
 {
+
 public:
     Encyclopedia();
-    Encyclopedia(int numberOfPages, char *title, int numberOfAuthors, Author *authors[MAX_AUTHORS], char *text);
+    Encyclopedia(int numberOfPages, char *title, char *text);
 
     //copy constructor
     Encyclopedia(const Encyclopedia &encyclopedia);
@@ -24,11 +23,10 @@ public:
     Encyclopedia &operator=(const Encyclopedia &encyclopedia);
 
     void printDetails();
-    void writeInCollaboration(char *additionalText);
+    char *getText();
+    void setText(char *text);
 
 protected:
-    Author *authors[5];
-    int numberOfAuthors;
     char *text;
 };
 

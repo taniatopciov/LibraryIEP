@@ -1,7 +1,7 @@
 #include "Reader.hpp"
 
 // constructor with member initialization list
-Reader::Reader(char *name, int age, Book *book)
+Reader::Reader(char *name, int age)
     : Person(name, age)
 {
     cout << "Reader constructor" << endl;
@@ -18,12 +18,24 @@ char *Reader::getReaderName()
     return this->name;
 }
 
-void Reader::readBook()
+void Reader::readBookAndShare(Book *book, Reader *anotherReader)
 {
-    cout << this->name << " is currently reading " << this->book->getTitle() << endl;
+    unique_ptr<Book> pBook(book);
+    cout << this->name << " is currently reading " << pBook.get()->getTitle() << endl;
+
+    // unique_ptr<Book> pBook2 = pBook;
+
+    // anotherReader->readBook(pBook2.get());
 }
 
-void Reader::readAnotherBook(Book *book)
+void Reader::readBookAndTransfer(Book *book, Reader *anotherReader)
 {
-    this->book = book;
+    unique_ptr<Book> pBook(book);
+    cout << this->name << " is currently reading " << pBook.get()->getTitle() << endl;
+
+    unique_ptr<Book> pBook2 = move(pBook);
+
+    cout << this->name << " cannot read that book anymore because the book's address canged to " << pBook.get() << endl;
+
+    cout << anotherReader->getReaderName() << " is currently reading " << pBook2.get()->getTitle() << endl;
 }

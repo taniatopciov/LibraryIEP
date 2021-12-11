@@ -1,9 +1,8 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include "../../Person/src/Author.hpp"
-
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 

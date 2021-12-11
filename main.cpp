@@ -1,84 +1,90 @@
 #include "src/Person/src/Author.hpp"
+#include "src/Person/src/Reader.hpp"
 #include "src/Book/src/Book.hpp"
 #include "src/Book/src/Novel.hpp"
+#include "src/Book/src/Encyclopedia.hpp"
 #include "src/Library/src/Library.hpp"
 
 #include <iostream>
 using namespace std;
 
-int main()
+void example_use_of_unique_ptr()
 {
-    char name1[20] = "Gustave Flaubert";
-    Author author1(name1, 59, 28);
+    char name1[20] = "Guzel Iahina";
+    Author guzel(name1, 45, 3);
 
-    cout << endl;
+    Author *a1;
+    a1 = &guzel;
 
-    char name2[20] = "Émile Zola";
-    Author author2(name2, 62, 43);
+    char title1[25] = "Zuleiha deschide ochii";
+    char literary_movement1[12] = "modernism";
 
-    cout << endl;
+    Novel *pNovel = new Novel(400, title1, a1, literary_movement1);
 
-    char title1[15] = "Madame Bovary";
-    char literary_movement1[12] = "Realism";
+    char name2[20] = "Tania";
+    Reader tania(name2, 22);
 
+    char name3[20] = "Ana";
+    Reader ana(name3, 23);
+    Reader *pReader = &ana;
+
+    // tania.readBookAndShare(pNovel, pReader);
+
+    tania.readBookAndTransfer(pNovel, pReader);
+}
+
+void example_use_of_shared_ptr()
+{
+    char title1[25] = "Enciclopedia Britanica";
+    char text1[2] = "";
+    shared_ptr<Encyclopedia> pEnc1 = make_shared<Encyclopedia>(1200, title1, text1);
+
+    char name1[20] = "Author 1";
+    Author author1(name1, 45, 3);
     Author *a1;
     a1 = &author1;
 
-    Novel novel1(400, title1, a1, literary_movement1);
+    a1->writeInCollaboration(pEnc1.get());
+    cout << pEnc1.get()->getText() << endl;
+    cout << pEnc1.use_count() << endl;
 
-    novel1.printDetails();
-
-    Novel novel2;
-
-    cout << endl;
-
-    novel2.printDetails();
-
-    Novel novel3;
-
-    cout << endl;
-
-    novel3.printDetails();
-
-    cout << endl;
-
-    // item 10 - Have assignment operators return a reference to *this
-    novel3 = novel2 = novel1;
-
-    cout << endl;
-
-    novel2.printDetails();
-
-    cout << endl;
-
-    novel3.printDetails();
-
-    cout << endl;
-    // item 11 - Handle assignment to self in operator=
-    novel2 = novel2;
-
-    cout << endl;
-
+    char name2[20] = "Author 2";
+    Author author2(name2, 28, 7);
     Author *a2;
     a2 = &author2;
 
-    char title2[10] = "Germinal";
-    char literary_movement2[20] = "Naturalism";
+    {
+        shared_ptr<Encyclopedia> pEnc2(pEnc1);
 
-    Novel novel4(350, title2, a2, literary_movement2);
+        a2->writeInCollaboration(pEnc2.get());
+        cout << pEnc2.get()->getText() << endl;
+        cout << pEnc2.use_count() << endl;
+    }
 
-    novel4.printDetails();
+    cout << pEnc1.use_count() << endl;
 
-    cout << endl;
+    char name3[20] = "Author 3";
+    Author author3(name3, 44, 21);
+    Author *a3;
+    a3 = &author3;
 
-    // item 12 - Copy all parts of an object
-    novel1 = novel4;
+    shared_ptr<Encyclopedia> pEnc3(pEnc1);
 
-    cout << endl;
+    a3->writeInCollaboration(pEnc3.get());
+    cout << pEnc3.get()->getText() << endl;
+    cout << pEnc3.use_count() << endl;
 
-    novel1.printDetails();
+    pEnc1.reset();
+    cout << pEnc3.use_count() << endl;
+}
 
-    cout << endl;
+int main()
+{
+    cout << "USAGE EXAMPLE FOR UNIQUE_PTR" << endl;
+    example_use_of_unique_ptr();
+
+    cout << "USAGE EXAMPLE FOR SHARED_PTR" << endl;
+    example_use_of_shared_ptr();
 
     return 0;
 }

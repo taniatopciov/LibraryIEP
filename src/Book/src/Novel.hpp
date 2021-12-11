@@ -2,6 +2,7 @@
 #define NOVEL_H
 
 #include "Book.hpp"
+#include "Author.hpp"
 
 #include <iostream>
 
