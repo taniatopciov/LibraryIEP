@@ -2,8 +2,7 @@
 
 // constructor with member initialization list
 Book::Book()
-    : numberOfPages(0),
-      author(NULL)
+    : numberOfPages(0)
 {
     this->title = new char[strlen("") + 1];
     strcpy(this->title, "");
@@ -11,9 +10,8 @@ Book::Book()
 
 // constructor with member initialization list
 // deep copy for title
-Book::Book(int numberOfPages, char *title, Author *author)
-    : numberOfPages(numberOfPages),
-      author(author)
+Book::Book(int numberOfPages, char *title)
+    : numberOfPages(numberOfPages)
 {
     this->title = new char[strlen(title) + 1];
     strcpy(this->title, title);
@@ -22,8 +20,7 @@ Book::Book(int numberOfPages, char *title, Author *author)
 // copy constructor
 // deep copy for title
 Book::Book(const Book &book)
-    : numberOfPages(book.numberOfPages),
-      author(book.author)
+    : numberOfPages(book.numberOfPages)
 {
     this->title = new char[strlen(book.title) + 1];
     strcpy(this->title, book.title);
@@ -59,8 +56,6 @@ Book &Book::operator=(const Book &book)
     strcpy(this->title, book.title);
     delete[] oldTitle;
 
-    this->author = book.author;
-
     logCall("Book copy assignment operator");
 
     return *this;
@@ -68,11 +63,9 @@ Book &Book::operator=(const Book &book)
 
 void Book::printDetails()
 {
-    if (this->author != NULL && this->numberOfPages != 0 && strcmp(this->title, "") != 0)
+    if (this->numberOfPages != 0 && strcmp(this->title, "") != 0)
     {
-        char *name = (this->author)->getAuthorName();
-        cout << "\"" << this->title << "\", written by " << name
-             << ", has " << this->numberOfPages << " pages." << endl;
+        cout << "\"" << this->title << " has " << this->numberOfPages << " pages." << endl;
     }
     else
     {

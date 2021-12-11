@@ -24,6 +24,7 @@ public:
     void printDetails();
 
 protected:
+    Author *author;
     char *literary_movement;
 };
 

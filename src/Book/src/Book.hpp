@@ -11,7 +11,7 @@ class Book
 {
 public:
     Book();
-    Book(int numberOfPages, char *title, Author *author);
+    Book(int numberOfPages, char *title);
 
     //copy constructor
     Book(const Book &book);
@@ -32,7 +32,6 @@ public:
 protected:
     int numberOfPages;
     char *title;
-    Author *author;
 };
 
 #endif //BOOK_H
