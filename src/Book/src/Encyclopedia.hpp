@@ -12,7 +12,7 @@ class Encyclopedia : public Book
 
 public:
     Encyclopedia();
-    Encyclopedia(int numberOfPages, char *title, char *text);
+    Encyclopedia(int numberOfPages, char *title, char *references);
 
     //copy constructor
     Encyclopedia(const Encyclopedia &encyclopedia);
@@ -23,11 +23,11 @@ public:
     Encyclopedia &operator=(const Encyclopedia &encyclopedia);
 
     void printDetails();
-    char *getText();
-    void setText(char *text);
+    char *getReferences();
+    void setReferences(char *references);
 
 protected:
-    char *text;
+    char *references;
 };
 
 #endif //ENCYCLOPEDIA_H

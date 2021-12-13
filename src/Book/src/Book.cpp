@@ -6,15 +6,31 @@ Book::Book()
 {
     this->title = new char[strlen("") + 1];
     strcpy(this->title, "");
+
+    this->text = new char[strlen("") + 1];
+    strcpy(this->text, "");
 }
 
-// constructor with member initialization list
-// deep copy for title
 Book::Book(int numberOfPages, char *title)
     : numberOfPages(numberOfPages)
 {
     this->title = new char[strlen(title) + 1];
     strcpy(this->title, title);
+
+    this->text = new char[strlen("") + 1];
+    strcpy(this->text, "");
+}
+
+// constructor with member initialization list
+// deep copy for title
+Book::Book(int numberOfPages, char *title, char *text)
+    : numberOfPages(numberOfPages)
+{
+    this->title = new char[strlen(title) + 1];
+    strcpy(this->title, title);
+
+    this->text = new char[strlen(text) + 1];
+    strcpy(this->text, text);
 }
 
 // copy constructor
@@ -25,6 +41,9 @@ Book::Book(const Book &book)
     this->title = new char[strlen(book.title) + 1];
     strcpy(this->title, book.title);
 
+    this->text = new char[strlen(book.text) + 1];
+    strcpy(this->text, book.text);
+
     logCall("Book copy constructor");
 }
 
@@ -34,6 +53,11 @@ Book::~Book()
     if (strcmp(title, "") != 0)
     {
         delete[] title;
+    }
+
+    if (strcmp(text, "") != 0)
+    {
+        delete[] text;
     }
 
     logCall("Book destructor");
@@ -55,6 +79,11 @@ Book &Book::operator=(const Book &book)
     this->title = new char[strlen(book.title) + 1];
     strcpy(this->title, book.title);
     delete[] oldTitle;
+
+    char *oldText = this->text;
+    this->text = new char[strlen(book.text) + 1];
+    strcpy(this->text, book.text);
+    delete[] oldText;
 
     logCall("Book copy assignment operator");
 
@@ -100,4 +129,14 @@ void Book::makeTitleLowercase()
 char *Book::getTitle()
 {
     return this->title;
+}
+
+char *Book::getText()
+{
+    return this->text;
+}
+
+void Book::setText(char *text)
+{
+    this->text = text;
 }

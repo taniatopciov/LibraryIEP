@@ -3,6 +3,7 @@
 #include "src/Book/src/Book.hpp"
 #include "src/Book/src/Novel.hpp"
 #include "src/Book/src/Encyclopedia.hpp"
+#include "src/Book/src/Textbook.hpp"
 #include "src/Library/src/Library.hpp"
 #include "src/Lock/src/Lock.hpp"
 
@@ -40,8 +41,8 @@ void example_use_of_unique_ptr()
 void example_use_of_shared_ptr()
 {
     char title1[25] = "Enciclopedia Britanica";
-    char text1[2] = "";
-    shared_ptr<Encyclopedia> pEnc1 = make_shared<Encyclopedia>(1200, title1, text1);
+    char references1[200] = "History of Encyclopædia Britannica and Britannica Online. Encyclopædia Britannica, Inc. Archived from the original on 20 October 2006. Retrieved 31 May 2019.";
+    shared_ptr<Encyclopedia> pEnc1 = make_shared<Encyclopedia>(1200, title1, references1);
 
     char name1[20] = "Author 1";
     Author author1(name1, 45, 3);
@@ -84,11 +85,9 @@ void example_use_of_shared_ptr()
 
 void example_mutex()
 {
-    char title1[25] = "Enciclopedia Britanica";
-    char text1[2] = "";
-    unique_ptr<Encyclopedia> pEnc = make_unique<Encyclopedia>(1200, title1, text1);
-
-    cout << "Initial encyclopedia content: " << pEnc.get()->getText() << endl;
+    char title1[15] = "Effective C++";
+    char subject1[15] = "Programming";
+    unique_ptr<Textbook> pTB = make_unique<Textbook>(180, title1, subject1);
 
     char name1[20] = "Author 1";
     Author author1(name1, 45, 3);
@@ -105,27 +104,29 @@ void example_mutex()
     Author *a3;
     a3 = &author3;
 
+    cout << "Initial textbook content: " << pTB.get()->getText() << endl;
+
     mutex m;
 
     {
         Lock lock1(&m);
 
-        a1->writeInCollaboration(pEnc.get());
-        cout << "Updated encyclopedia content: " << pEnc.get()->getText() << endl;
+        a1->writeInCollaboration(pTB.get());
+        cout << "Updated textbook content: " << pTB.get()->getText() << endl;
     }
 
     {
         Lock lock2(&m);
 
-        a2->writeInCollaboration(pEnc.get());
-        cout << "Updated encyclopedia content: " << pEnc.get()->getText() << endl;
+        a2->writeInCollaboration(pTB.get());
+        cout << "Updated textbook content: " << pTB.get()->getText() << endl;
     }
 
     {
         Lock lock3(&m);
 
-        a3->writeInCollaboration(pEnc.get());
-        cout << "Updated encyclopedia content: " << pEnc.get()->getText() << endl;
+        a3->writeInCollaboration(pTB.get());
+        cout << "Updated textbook content: " << pTB.get()->getText() << endl;
     }
 }
 
@@ -134,10 +135,10 @@ int main()
     cout << "USAGE EXAMPLE FOR UNIQUE_PTR" << endl;
     example_use_of_unique_ptr();
 
-    cout << "USAGE EXAMPLE FOR SHARED_PTR" << endl;
+    cout << "\nUSAGE EXAMPLE FOR SHARED_PTR" << endl;
     example_use_of_shared_ptr();
 
-    cout << "EXAMPLE MUTEX" << endl;
+    cout << "\nEXAMPLE MUTEX" << endl;
     example_mutex();
 
     return 0;

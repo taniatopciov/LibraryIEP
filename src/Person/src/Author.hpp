@@ -15,7 +15,7 @@ public:
     Author(char *name, int age, int numberOfWrittenBooks);
     void printPresentation();
     char *getAuthorName();
-    void writeInCollaboration(Encyclopedia *e);
+    void writeInCollaboration(Book *b);
 
 private:
     int numberOfWrittenBooks;

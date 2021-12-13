@@ -2,31 +2,31 @@
 
 Encyclopedia::Encyclopedia() : Book()
 {
-    this->text = new char[strlen("") + 1];
-    strcpy(this->text, "");
+    this->references = new char[strlen("") + 1];
+    strcpy(this->references, "");
 }
 
-Encyclopedia::Encyclopedia(int numberOfPages, char *title, char *text)
+Encyclopedia::Encyclopedia(int numberOfPages, char *title, char *references)
     : Book(numberOfPages, title)
 {
-    this->text = new char[strlen(text) + 1];
-    strcpy(this->text, text);
+    this->references = new char[strlen(references) + 1];
+    strcpy(this->references, references);
 }
 
 Encyclopedia::Encyclopedia(const Encyclopedia &encyclopedia)
     : Book(encyclopedia)
 {
-    this->text = new char[strlen(encyclopedia.text) + 1];
-    strcpy(this->text, encyclopedia.text);
+    this->references = new char[strlen(encyclopedia.references) + 1];
+    strcpy(this->references, encyclopedia.references);
 
     logCall("Encyclopedia copy constructor");
 }
 
 Encyclopedia::~Encyclopedia()
 {
-    if ((this->text, "") != 0)
+    if ((this->references, "") != 0)
     {
-        delete[] text;
+        delete[] references;
     }
 
     logCall("Encyclopedia destructor");
@@ -42,10 +42,10 @@ Encyclopedia &Encyclopedia::operator=(const Encyclopedia &encyclopedia)
 
     Book::operator=(encyclopedia);
 
-    char *oldText = this->text;
-    this->text = new char[strlen(encyclopedia.text) + 1];
-    strcpy(this->text, encyclopedia.text);
-    delete[] oldText;
+    char *oldReferences = this->references;
+    this->references = new char[strlen(encyclopedia.references) + 1];
+    strcpy(this->references, encyclopedia.references);
+    delete[] oldReferences;
 
     logCall("Encyclopedia copy assignment operator");
 
@@ -58,9 +58,9 @@ void Encyclopedia::printDetails()
 
     int i;
 
-    if (strcmp(this->text, "") != 0)
+    if (strcmp(this->references, "") != 0)
     {
-        cout << "Text: " << this->text << endl;
+        cout << "References: " << this->references << endl;
     }
     else
     {
@@ -68,12 +68,12 @@ void Encyclopedia::printDetails()
     }
 }
 
-char *Encyclopedia::getText()
+char *Encyclopedia::getReferences()
 {
-    return this->text;
+    return this->references;
 }
 
-void Encyclopedia::setText(char *text)
+void Encyclopedia::setReferences(char *references)
 {
-    this->text = text;
+    this->references = references;
 }

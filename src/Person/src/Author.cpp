@@ -32,19 +32,19 @@ char *Author::write()
     return text;
 }
 
-void Author::writeInCollaboration(Encyclopedia *e)
+void Author::writeInCollaboration(Book *b)
 {
-    char *oldText = e->getText();
+    char *oldText = b->getText();
 
     unique_ptr<char> additionalText(write());
 
     char *newText;
 
-    newText = new char[strlen(e->getText()) + strlen(additionalText.get()) + 1];
+    newText = new char[strlen(b->getText()) + strlen(additionalText.get()) + 1];
     strcpy(newText, oldText);
     strcat(newText, additionalText.get());
 
     delete[] oldText;
 
-    e->setText(newText);
+    b->setText(newText);
 }
