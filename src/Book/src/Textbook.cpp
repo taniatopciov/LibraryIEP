@@ -11,6 +11,8 @@ Textbook::Textbook(int numberOfPages, char *title, char *subject)
 {
     this->subject = new char[strlen(subject) + 1];
     strcpy(this->subject, subject);
+
+    logCall("Textbook constructor");
 }
 
 Textbook::~Textbook()

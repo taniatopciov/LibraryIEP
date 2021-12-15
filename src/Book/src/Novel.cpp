@@ -14,6 +14,8 @@ Novel::Novel(int numberOfPages, char *title, Author *author, char *literary_move
 {
     this->literary_movement = new char[strlen(literary_movement) + 1];
     strcpy(this->literary_movement, literary_movement);
+
+    logCall("Novel constructor");
 }
 
 Novel::Novel(const Novel &novel)

@@ -11,6 +11,8 @@ Encyclopedia::Encyclopedia(int numberOfPages, char *title, char *references)
 {
     this->references = new char[strlen(references) + 1];
     strcpy(this->references, references);
+
+    logCall("Encyclopedia constructor");
 }
 
 Encyclopedia::Encyclopedia(const Encyclopedia &encyclopedia)

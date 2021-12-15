@@ -12,6 +12,7 @@ using namespace std;
 class Author : private Person
 {
 public:
+    Author(const char *, int age, int numberOfWrittenBooks);
     Author(char *name, int age, int numberOfWrittenBooks);
     void printPresentation();
     char *getAuthorName();

@@ -8,6 +8,11 @@ Author::Author(char *name, int age, int numberOfWrittenBooks)
     cout << "Author constructor" << endl;
 }
 
+Author::Author(const char *name, int age, int numberOfWrittenBooks)
+    : Author((char *)name, age, numberOfWrittenBooks)
+{
+}
+
 void Author::printPresentation()
 {
     cout << "Hello! My name is " << this->name

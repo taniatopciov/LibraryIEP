@@ -19,6 +19,8 @@ Book::Book(int numberOfPages, char *title)
 
     this->text = new char[strlen("") + 1];
     strcpy(this->text, "");
+
+    logCall("Book constructor");
 }
 
 // constructor with member initialization list
@@ -31,6 +33,8 @@ Book::Book(int numberOfPages, char *title, char *text)
 
     this->text = new char[strlen(text) + 1];
     strcpy(this->text, text);
+
+    logCall("Book constructor");
 }
 
 // copy constructor
