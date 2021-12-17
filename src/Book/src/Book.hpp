@@ -1,9 +1,8 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include "../../Person/src/Author.hpp"
-
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -11,7 +10,8 @@ class Book
 {
 public:
     Book();
-    Book(int numberOfPages, char *title, Author *author);
+    Book(int numberOfPages, char *title);
+    Book(int numberOfPages, char *title, char *text);
 
     //copy constructor
     Book(const Book &book);
@@ -25,6 +25,9 @@ public:
 
     virtual void printDetails();
 
+    char *getText();
+    void setText(char *text);
+
     void logCall(const string funcName);
     void makeTitleUppercase();
     void makeTitleLowercase();
@@ -32,7 +35,7 @@ public:
 protected:
     int numberOfPages;
     char *title;
-    Author *author;
+    char *text;
 };
 
 #endif //BOOK_H

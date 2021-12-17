@@ -2,6 +2,7 @@
 #define NOVEL_H
 
 #include "Book.hpp"
+#include "Author.hpp"
 
 #include <iostream>
 
@@ -24,6 +25,7 @@ public:
     void printDetails();
 
 protected:
+    Author *author;
     char *literary_movement;
 };
 

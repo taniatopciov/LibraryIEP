@@ -2,22 +2,29 @@
 
 Novel::Novel() : Book()
 {
+    this->author = NULL;
+
     this->literary_movement = new char[strlen("") + 1];
     strcpy(this->literary_movement, "");
 }
 
 Novel::Novel(int numberOfPages, char *title, Author *author, char *literary_movement)
-    : Book(numberOfPages, title, author)
+    : Book(numberOfPages, title),
+      author(author)
 {
     this->literary_movement = new char[strlen(literary_movement) + 1];
     strcpy(this->literary_movement, literary_movement);
+
+    logCall("Novel constructor");
 }
 
 Novel::Novel(const Novel &novel)
     : Book(novel)
 {
+    this->author = novel.author;
+
     this->literary_movement = new char[strlen(novel.literary_movement) + 1];
-    strcpy(this->title, novel.title);
+    strcpy(this->literary_movement, novel.literary_movement);
 
     logCall("Novel copy constructor");
 }
@@ -42,6 +49,8 @@ Novel &Novel::operator=(const Novel &novel)
 
     Book::operator=(novel);
 
+    this->author = novel.author;
+
     char *oldLiteraryMovement = this->literary_movement;
     this->literary_movement = new char[strlen(novel.literary_movement) + 1];
     strcpy(this->literary_movement, novel.literary_movement);
@@ -56,9 +65,10 @@ void Novel::printDetails()
 {
     Book::printDetails();
 
-    if (strcmp(this->literary_movement, "") != 0)
+    if (this->author != NULL && strcmp(this->literary_movement, "") != 0)
     {
         char *name = (this->author)->getAuthorName();
+        cout << "Author: " << name << endl;
         cout << "Literary movement: " << this->literary_movement << endl;
     }
     else

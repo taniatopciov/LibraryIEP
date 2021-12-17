@@ -2,31 +2,51 @@
 
 // constructor with member initialization list
 Book::Book()
-    : numberOfPages(0),
-      author(NULL)
+    : numberOfPages(0)
 {
     this->title = new char[strlen("") + 1];
     strcpy(this->title, "");
+
+    this->text = new char[strlen("") + 1];
+    strcpy(this->text, "");
+}
+
+Book::Book(int numberOfPages, char *title)
+    : numberOfPages(numberOfPages)
+{
+    this->title = new char[strlen(title) + 1];
+    strcpy(this->title, title);
+
+    this->text = new char[strlen("") + 1];
+    strcpy(this->text, "");
+
+    logCall("Book constructor");
 }
 
 // constructor with member initialization list
 // deep copy for title
-Book::Book(int numberOfPages, char *title, Author *author)
-    : numberOfPages(numberOfPages),
-      author(author)
+Book::Book(int numberOfPages, char *title, char *text)
+    : numberOfPages(numberOfPages)
 {
     this->title = new char[strlen(title) + 1];
     strcpy(this->title, title);
+
+    this->text = new char[strlen(text) + 1];
+    strcpy(this->text, text);
+
+    logCall("Book constructor");
 }
 
 // copy constructor
 // deep copy for title
 Book::Book(const Book &book)
-    : numberOfPages(book.numberOfPages),
-      author(book.author)
+    : numberOfPages(book.numberOfPages)
 {
     this->title = new char[strlen(book.title) + 1];
     strcpy(this->title, book.title);
+
+    this->text = new char[strlen(book.text) + 1];
+    strcpy(this->text, book.text);
 
     logCall("Book copy constructor");
 }
@@ -37,6 +57,11 @@ Book::~Book()
     if (strcmp(title, "") != 0)
     {
         delete[] title;
+    }
+
+    if (strcmp(text, "") != 0)
+    {
+        delete[] text;
     }
 
     logCall("Book destructor");
@@ -59,7 +84,10 @@ Book &Book::operator=(const Book &book)
     strcpy(this->title, book.title);
     delete[] oldTitle;
 
-    this->author = book.author;
+    char *oldText = this->text;
+    this->text = new char[strlen(book.text) + 1];
+    strcpy(this->text, book.text);
+    delete[] oldText;
 
     logCall("Book copy assignment operator");
 
@@ -68,11 +96,9 @@ Book &Book::operator=(const Book &book)
 
 void Book::printDetails()
 {
-    if (this->author != NULL && this->numberOfPages != 0 && strcmp(this->title, "") != 0)
+    if (this->numberOfPages != 0 && strcmp(this->title, "") != 0)
     {
-        char *name = (this->author)->getAuthorName();
-        cout << "\"" << this->title << "\", written by " << name
-             << ", has " << this->numberOfPages << " pages." << endl;
+        cout << "\"" << this->title << " has " << this->numberOfPages << " pages." << endl;
     }
     else
     {
@@ -107,4 +133,14 @@ void Book::makeTitleLowercase()
 char *Book::getTitle()
 {
     return this->title;
+}
+
+char *Book::getText()
+{
+    return this->text;
+}
+
+void Book::setText(char *text)
+{
+    this->text = text;
 }
